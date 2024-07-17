@@ -32,6 +32,7 @@ export default (components: OBC.Components, world?: OBC.World) => {
     const areas = components.get(OBCF.AreaMeasurement);
     areas.world = world;
     areas.enabled = true;
+    areas.create();
     // Aquí puedes añadir lógica adicional para la creación de mediciones de áreas
     console.log('Medición de áreas activada');
   };

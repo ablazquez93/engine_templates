@@ -1,18 +1,20 @@
-import * as OBC from "@thatopen/components";
-import * as OBF from "@thatopen/components-front";
-import * as BUI from "@thatopen/ui";
+import * as OBC from '@thatopen/components';
+import * as OBF from '@thatopen/components-front';
+import * as BUI from '@thatopen/ui';
 
 export default (components: OBC.Components, world: OBC.World) => {
   const { camera } = world;
+  const highlighter = components.get(OBF.Highlighter);
 
-  const onFitModel = () => {
+  const onFitModel = (e: Event) => {
     if (camera instanceof OBC.OrthoPerspectiveCamera && world.meshes.size > 0) {
       camera.fit(world.meshes, 0.5);
     }
   };
 
-  const onFitSelected = () => {
-    const highlighter = components.get(OBF.Highlighter);
+  const onFitSelected = (e: Event) => {
+    const button = e.target as BUI.Button;
+    button.active = !highlighter.zoomToSelection;
     highlighter.zoomToSelection = !highlighter.zoomToSelection;
   };
 
@@ -20,10 +22,8 @@ export default (components: OBC.Components, world: OBC.World) => {
     const button = e.target as BUI.Button;
     camera.enabled = !camera.enabled;
     button.active = !camera.enabled;
-    button.label = camera.enabled ? "Disable" : "Enable";
-    button.icon = camera.enabled
-      ? "tabler:lock-filled"
-      : "majesticons:unlock-open";
+    button.label = camera.enabled ? 'Disable' : 'Enable';
+    button.icon = camera.enabled ? 'tabler:lock-filled' : 'majesticons:unlock-open';
   };
 
   return BUI.Component.create<BUI.PanelSection>(() => {
@@ -33,7 +33,9 @@ export default (components: OBC.Components, world: OBC.World) => {
         <bim-button label="Zoom a modelo" icon="material-symbols:fit-screen-rounded" tooltip-title="Zoom a modelo"
             tooltip-text="Hace zoom al modelo completo" @click=${onFitModel}></bim-button>
         <bim-button label="Zoom a seleccion" icon="material-symbols:fit-screen-rounded" tooltip-title="Zoom a seleccion"
-            tooltip-text="Hace zoom a lo que se selecciona" @click=${onFitSelected}></bim-button>
+            tooltip-text="Hace zoom a lo que se selecciona" @click=${onFitSelected} .active=${
+      highlighter.zoomToSelection ? true : false
+    }></bim-button>
         <bim-button label="Bloquear" icon="tabler:lock-filled" tooltip-title="Bloquear"
             tooltip-text="Bloquea la visualización" @click=${onLock} .active=${!camera.enabled}></bim-button>
         
