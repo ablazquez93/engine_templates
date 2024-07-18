@@ -35,7 +35,7 @@ export default (components: OBC.Components) => {
           ${relationsTree}
         </bim-panel-section>
         ${groupings(components)}
-        ${measurements(components)}
+        <!-- ${measurements(components)} -->
       </bim-panel> 
     `;
   });

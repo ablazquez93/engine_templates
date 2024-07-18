@@ -41,14 +41,14 @@ export default (components: OBC.Components, world: OBC.World) => {
         <bim-button label="Bloquear" icon="tabler:lock-filled" tooltip-title="Bloquear"
             tooltip-text="Bloquea la visualización" @click=${onLock} .active=${!camera.enabled}></bim-button>
         
-       <!-- <bim-dropdown required label="Proyección de la camara" 
-            // @change="$//{({ target }: { target: BUI.Dropdown }) => {
+        <!--<bim-dropdown required label="Proyección de la camara" 
+            @change="$//{({ target }: { target: BUI.Dropdown }) => {
               // const selected = target.value[0] as OBC.CameraProjection;
               // world.camera.projection.set(selected);
             }}">
           <bim-option checked label="Perspectiva"></bim-option>
-          <bim-option label="Orthografica"></bim-option>
-        </bim-dropdown> -->
+          <bim-option label="Orthografica></bim-option>
+        </bim-dropdown>-->
       </bim-toolbar-section>
       </div>
     `;
