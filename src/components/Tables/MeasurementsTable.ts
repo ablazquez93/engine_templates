@@ -1,13 +1,12 @@
-import * as OBC from '@thatopen/components';
-import * as BUI from '@thatopen/ui';
-import * as OBCF from '@thatopen/components-front';
+import * as OBC from "@thatopen/components";
+import * as BUI from "@thatopen/ui";
+import * as OBCF from "@thatopen/components-front";
 
 interface GroupingsUIState {
   components: OBC.Components;
 }
 
 export default (state: GroupingsUIState) => {
-  const { components } = state;
   const computeTableData = (components: OBC.Components) => {
     const dimensions = components.get(OBCF.FaceMeasurement);
 
@@ -24,7 +23,7 @@ export default (state: GroupingsUIState) => {
     return data;
   };
 
-  const table = document.createElement('bim-table');
+  const table = document.createElement("bim-table");
   table.headersHidden = true;
 
   table.dataTransform = {
@@ -37,8 +36,11 @@ export default (state: GroupingsUIState) => {
     },
   };
 
-  return BUI.Component.create<BUI.Table, GroupingsUIState>((state: GroupingsUIState) => {
-    table.data = computeTableData(state.components);
-    return BUI.html`${table}`;
-  }, state);
+  return BUI.Component.create<BUI.Table, GroupingsUIState>(
+    (state: GroupingsUIState) => {
+      table.data = computeTableData(state.components);
+      return BUI.html`${table}`;
+    },
+    state
+  );
 };
